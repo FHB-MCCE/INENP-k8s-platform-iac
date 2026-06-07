@@ -27,3 +27,21 @@ variable "name_prefix" {
   type        = string
   default     = "inenp"
 }
+
+variable "gke_machine_type" {
+  description = "Machine type used by the GKE node pool."
+  type        = string
+  default     = "n2-standard-2"
+}
+
+variable "gke_min_node_count" {
+  description = "Minimum node count for the GKE node pool."
+  type        = number
+  default     = 3
+}
+
+variable "gke_max_node_count" {
+  description = "Maximum node count for the GKE node pool."
+  type        = number
+  default     = 4
+}

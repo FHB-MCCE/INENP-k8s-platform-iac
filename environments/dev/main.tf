@@ -20,3 +20,19 @@ module "network" {
 
   labels = local.labels
 }
+
+module "gke" {
+  source = "../../modules/gke"
+
+  project_id                    = var.project_id
+  cluster_name                  = "${var.name_prefix}-${var.environment}-gke"
+  zone                          = var.zone
+  network_self_link             = module.network.network_self_link
+  subnet_self_link              = module.network.subnets["gke_nodes"].self_link
+  pods_secondary_range_name     = "pods"
+  services_secondary_range_name = "services"
+  machine_type                  = var.gke_machine_type
+  min_node_count                = var.gke_min_node_count
+  max_node_count                = var.gke_max_node_count
+  labels                        = local.labels
+}
