@@ -37,3 +37,18 @@ output "gke_node_service_account_email" {
   description = "Email address of the GKE node service account."
   value       = module.gke.node_service_account_email
 }
+
+output "dns_zone_name" {
+  description = "Name of the Cloud DNS managed zone."
+  value       = module.dns_secrets.dns_zone_name
+}
+
+output "dns_name_servers" {
+  description = "Authoritative name servers for manual parent-domain delegation."
+  value       = module.dns_secrets.dns_name_servers
+}
+
+output "secret_manager_secret_ids" {
+  description = "Secret Manager secret containers created for the platform."
+  value       = module.dns_secrets.secret_ids
+}

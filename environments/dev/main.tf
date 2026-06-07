@@ -36,3 +36,13 @@ module "gke" {
   max_node_count                = var.gke_max_node_count
   labels                        = local.labels
 }
+
+module "dns_secrets" {
+  source = "../../modules/dns-secrets"
+
+  project_id = var.project_id
+  zone_name  = var.dns_zone_name
+  dns_name   = var.domain_name
+  secrets    = var.secret_manager_secrets
+  labels     = local.labels
+}

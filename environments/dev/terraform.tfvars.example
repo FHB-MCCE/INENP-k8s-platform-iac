@@ -7,3 +7,6 @@ name_prefix = "inenp"
 gke_machine_type   = "n2-standard-2"
 gke_min_node_count = 3
 gke_max_node_count = 4
+
+domain_name   = "inenp.naehrer.me"
+dns_zone_name = "inenp-naehrer-me"
