@@ -45,3 +45,36 @@ variable "gke_max_node_count" {
   type        = number
   default     = 4
 }
+
+variable "domain_name" {
+  description = "DNS domain delegated to the platform."
+  type        = string
+  default     = "inenp.naehrer.me"
+}
+
+variable "dns_zone_name" {
+  description = "Cloud DNS managed zone name."
+  type        = string
+  default     = "inenp-naehrer-me"
+}
+
+variable "secret_manager_secrets" {
+  description = "Secret Manager secret containers created without secret versions."
+  type = map(object({
+    purpose = string
+  }))
+  default = {
+    frontend-ghcr-pull-token = {
+      purpose = "ghcr-pull-token"
+    }
+    database-app-password = {
+      purpose = "database-password"
+    }
+    backend-jwt-secret = {
+      purpose = "backend-jwt"
+    }
+    letsencrypt-account-email = {
+      purpose = "acme-account"
+    }
+  }
+}
