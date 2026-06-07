@@ -46,6 +46,9 @@ Die Umgebung `environments/dev` bildet die Projektvorgaben ab:
 - Zone `europe-west3-a`
 - Custom VPC `inenp-dev-vpc`
 - Subnet `inenp-dev-gke-nodes` mit separaten Secondary Ranges für Pods und Services
+- Zonal GKE Standard Cluster `inenp-dev-gke`
+- Node Pool mit `n2-standard-2`, Autoscaling von 3 bis 4 Nodes
+- Workload Identity mit `dulcet-velocity-495612-j0.svc.id.goog`
 
 Der GCS-State-Bucket wird in Gate 1 nur konfiguriert. Er wird vor dem ersten `terraform init` in Gate 2 separat angelegt.
 
