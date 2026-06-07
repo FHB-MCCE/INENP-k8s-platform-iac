@@ -1,0 +1,5 @@
+project_id  = "dulcet-velocity-495612-j0"
+region      = "europe-west3"
+zone        = "europe-west3-a"
+environment = "dev"
+name_prefix = "inenp"
