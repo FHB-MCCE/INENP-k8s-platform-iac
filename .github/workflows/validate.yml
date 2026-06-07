@@ -1,0 +1,65 @@
+name: Validate IaC
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  fmt:
+    name: Terraform Format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.5.7"
+
+      - name: Terraform Format Check
+        run: terraform fmt -check -recursive
+
+  validate:
+    name: Terraform Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.5.7"
+
+      - name: Terraform Init
+        run: |
+          for dir in $(find . -name '*.tf' -printf '%h\n' | sort -u); do
+            echo "::group::Init $dir"
+            terraform -chdir="$dir" init -backend=false
+            echo "::endgroup::"
+          done
+
+      - name: Terraform Validate
+        run: |
+          for dir in $(find . -name '*.tf' -printf '%h\n' | sort -u); do
+            echo "::group::Validate $dir"
+            terraform -chdir="$dir" validate
+            echo "::endgroup::"
+          done
+
+  yaml-lint:
+    name: YAML Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install yamllint
+        run: pip install yamllint
+
+      - name: Run yamllint
+        run: yamllint -c .yamllint.yml . || true
