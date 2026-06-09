@@ -46,3 +46,10 @@ module "dns_secrets" {
   secrets    = var.secret_manager_secrets
   labels     = local.labels
 }
+
+module "platform_identity" {
+  source = "../../modules/platform-identity"
+
+  project_id       = var.project_id
+  service_accounts = var.platform_service_accounts
+}

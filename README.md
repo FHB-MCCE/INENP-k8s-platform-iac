@@ -51,6 +51,7 @@ Die Umgebung `environments/dev` bildet die Projektvorgaben ab:
 - Workload Identity mit `dulcet-velocity-495612-j0.svc.id.goog`
 - Cloud DNS Zone `inenp-naehrer-me` für `inenp.naehrer.me`
 - Secret Manager Container für GHCR Pull Token, Datenbankpasswort, Backend JWT Secret und ACME Kontakt
+- Google Service Accounts und Workload Identity Bindings für ExternalDNS, ESO, cert-manager und Crossplane
 
 Der GCS-State-Bucket wird in Gate 1 nur konfiguriert. Er wird vor dem ersten `terraform init` in Gate 2 separat angelegt.
 
