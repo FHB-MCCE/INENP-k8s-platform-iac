@@ -52,3 +52,13 @@ output "secret_manager_secret_ids" {
   description = "Secret Manager secret containers created for the platform."
   value       = module.dns_secrets.secret_ids
 }
+
+output "platform_service_account_emails" {
+  description = "Google service account emails for platform operators."
+  value       = module.platform_identity.service_account_emails
+}
+
+output "workload_identity_annotations" {
+  description = "Kubernetes service account annotations for platform operators."
+  value       = module.platform_identity.workload_identity_annotations
+}

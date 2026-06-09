@@ -78,3 +78,53 @@ variable "secret_manager_secrets" {
     }
   }
 }
+
+variable "platform_service_accounts" {
+  description = "Google service accounts and Workload Identity bindings for platform operators."
+  type = map(object({
+    display_name               = string
+    description                = string
+    kubernetes_namespace       = string
+    kubernetes_service_account = string
+    project_roles              = list(string)
+  }))
+  default = {
+    external-dns = {
+      display_name               = "ExternalDNS"
+      description                = "Allows ExternalDNS to manage records in Cloud DNS."
+      kubernetes_namespace       = "external-dns"
+      kubernetes_service_account = "external-dns"
+      project_roles = [
+        "roles/dns.admin",
+      ]
+    }
+    external-secrets = {
+      display_name               = "External Secrets Operator"
+      description                = "Allows External Secrets Operator to read Google Secret Manager secrets."
+      kubernetes_namespace       = "external-secrets"
+      kubernetes_service_account = "external-secrets"
+      project_roles = [
+        "roles/secretmanager.secretAccessor",
+        "roles/secretmanager.viewer",
+      ]
+    }
+    cert-manager = {
+      display_name               = "cert-manager DNS01 solver"
+      description                = "Allows cert-manager to complete ACME DNS-01 challenges in Cloud DNS."
+      kubernetes_namespace       = "cert-manager"
+      kubernetes_service_account = "cert-manager"
+      project_roles = [
+        "roles/dns.admin",
+      ]
+    }
+    crossplane = {
+      display_name               = "Crossplane"
+      description                = "Allows Crossplane providers to manage Google Cloud resources for tenants."
+      kubernetes_namespace       = "crossplane-system"
+      kubernetes_service_account = "crossplane"
+      project_roles = [
+        "roles/iam.serviceAccountUser",
+      ]
+    }
+  }
+}
