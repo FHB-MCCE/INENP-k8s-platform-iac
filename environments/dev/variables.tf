@@ -67,6 +67,9 @@ variable "secret_manager_secrets" {
     frontend-ghcr-pull-token = {
       purpose = "ghcr-pull-token"
     }
+    argocd-frontend-repo-credentials = {
+      purpose = "argocd-frontend-repository"
+    }
     database-app-password = {
       purpose = "database-password"
     }
