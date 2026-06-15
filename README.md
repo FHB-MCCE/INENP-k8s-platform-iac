@@ -50,12 +50,12 @@ Die Umgebung `environments/dev` bildet die Projektvorgaben ab:
 - Node Pool mit `n2-standard-2`, Autoscaling von 3 bis 4 Nodes
 - Workload Identity mit `dulcet-velocity-495612-j0.svc.id.goog`
 - Cloud DNS Zone `inenp-naehrer-me` für `inenp.naehrer.me`
-- Secret Manager Container für GHCR Pull Token, Datenbankpasswort, AVWX API Key, Backend JWT Secret und ACME Kontakt
+- Secret Manager Container für GHCR Pull Token, Argo CD Frontend-Repo-Zugriff, Datenbankpasswort, AVWX API Key, Backend JWT Secret und ACME Kontakt
 - Google Service Accounts und Workload Identity Bindings für ExternalDNS, ESO, cert-manager und Crossplane
 
 Der GCS-State-Bucket wird in Gate 1 nur konfiguriert. Er wird vor dem ersten `terraform init` in Gate 2 separat angelegt.
 
-Die Cloud DNS Delegation bleibt ein manueller Schritt: Nach dem ersten Apply müssen die ausgegebenen Name Server im Parent-Domain-Setup von `naehrer.me` eingetragen werden. Secret-Werte werden nicht durch Terraform verwaltet; Gate 1 legt nur die Secret-Container an.
+Die Cloud DNS Delegation bleibt ein manueller Schritt: Nach dem ersten Apply müssen die ausgegebenen Name Server im Parent-Domain-Setup von `naehrer.me` eingetragen werden. Secret-Werte werden nicht durch Terraform verwaltet; Gate 1 legt nur die Secret-Container an. Der GHCR Pull Token wird von Kubernetes für Image Pulls verwendet; das separate Argo CD Frontend-Repo-Secret wird von Argo CD benötigt, um das private Frontend-Repository als Helm-Quelle lesen zu können.
 
 ## CI/CD
 
