@@ -70,6 +70,9 @@ variable "secret_manager_secrets" {
     database-app-password = {
       purpose = "database-password"
     }
+    avwx-api-key = {
+      purpose = "backend-weather-api"
+    }
     backend-jwt-secret = {
       purpose = "backend-jwt"
     }
