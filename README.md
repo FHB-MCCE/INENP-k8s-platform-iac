@@ -95,6 +95,11 @@ Der GCS-State-Bucket wird in Gate 1 nur konfiguriert. Er wird vor dem ersten `te
 
 Die Cloud DNS Delegation bleibt ein manueller Schritt: Nach dem ersten Apply müssen die ausgegebenen Name Server im Parent-Domain-Setup von `naehrer.me` eingetragen werden. Secret-Werte werden nicht durch Terraform verwaltet; Gate 1 legt nur die Secret-Container an. Der GHCR Pull Token wird von Kubernetes für Image Pulls verwendet; das separate Argo CD Frontend-Repo-Secret wird von Argo CD benötigt, um das private Frontend-Repository als Helm-Quelle lesen zu können.
 
+Der administrative Cluster-Zugang für den Lehrenden ist in
+[docs/lecturer-cluster-access.md](docs/lecturer-cluster-access.md) dokumentiert.
+Er verwendet die bereits berechtigte institutionelle Google-Identität und
+keine geteilten Zugangsdaten.
+
 ## CI/CD
 
 Pull Requests werden automatisch validiert:
