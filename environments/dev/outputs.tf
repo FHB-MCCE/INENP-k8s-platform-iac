@@ -62,3 +62,18 @@ output "workload_identity_annotations" {
   description = "Kubernetes service account annotations for platform operators."
   value       = module.platform_identity.workload_identity_annotations
 }
+
+output "github_actions_service_account" {
+  description = "Service account used by the keyless Terraform apply workflow."
+  value       = module.github_actions_identity.service_account_email
+}
+
+output "github_actions_workload_identity_provider" {
+  description = "Workload Identity provider trusted by the Terraform apply workflow."
+  value       = module.github_actions_identity.workload_identity_provider
+}
+
+output "gitops_bootstrap_id" {
+  description = "Identifier of the automated Argo CD and root Application bootstrap."
+  value       = module.gitops_bootstrap.bootstrap_id
+}

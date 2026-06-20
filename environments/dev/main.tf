@@ -53,3 +53,27 @@ module "platform_identity" {
   project_id       = var.project_id
   service_accounts = var.platform_service_accounts
 }
+
+module "github_actions_identity" {
+  source = "../../modules/github-actions-identity"
+
+  project_id          = var.project_id
+  repository          = "FHB-MCCE/INENP-k8s-platform-iac"
+  repository_id       = "1233723146"
+  repository_owner_id = "283122619"
+  state_bucket        = "dulcet-velocity-495612-j0-inenp-tfstate"
+}
+
+module "gitops_bootstrap" {
+  source = "../../modules/gitops-bootstrap"
+
+  project_id        = var.project_id
+  cluster_name      = module.gke.cluster_name
+  cluster_location  = module.gke.cluster_location
+  cluster_endpoint  = nonsensitive(module.gke.cluster_endpoint)
+  argocd_version    = "v3.4.3"
+  gitops_repository = "FHB-MCCE/INENP-k8s-platform-gitops"
+  gitops_revision   = "main"
+
+  depends_on = [module.gke]
+}
