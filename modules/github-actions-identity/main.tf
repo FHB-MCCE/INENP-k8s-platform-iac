@@ -8,6 +8,7 @@ locals {
     "roles/iam.workloadIdentityPoolAdmin",
     "roles/resourcemanager.projectIamAdmin",
     "roles/secretmanager.admin",
+    "roles/serviceusage.serviceUsageConsumer",
   ])
 }
 
@@ -28,7 +29,7 @@ resource "google_project_iam_member" "apply" {
 
 resource "google_storage_bucket_iam_member" "terraform_state" {
   bucket = var.state_bucket
-  role   = "roles/storage.objectAdmin"
+  role   = "roles/storage.admin"
   member = "serviceAccount:${google_service_account.github_actions.email}"
 }
 
